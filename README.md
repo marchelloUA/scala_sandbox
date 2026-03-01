@@ -30,9 +30,21 @@ scala-cli version
 ```
 scala-sandbox/
 ├── README.md
+├── build.sbt
 ├── hello.sc
 ├── wordcount.sc
-└── spark_hello.sc
+├── case_class.sc
+├── spark_hello.sc
+├── dataset_transformation.sc
+├── etl_pipeline.sc
+├── src/
+│   ├── main/scala/
+│   │   ├── WordCounter.scala
+│   │   └── PersonUtils.scala
+│   └── test/scala/
+│       ├── WordCounterTest.scala
+│       └── PersonUtilsTest.scala
+└── project/
 ```
 
 ## Quick start
@@ -49,10 +61,36 @@ Run word count example:
 scala-cli wordcount.sc
 ```
 
+Run case class demo:
+
+```bash
+scala-cli case_class.sc
+```
+
 Run Spark example (optional, heavier):
 
 ```bash
 scala-cli spark_hello.sc
+```
+
+Run dataset transformation:
+
+```bash
+scala-cli dataset_transformation.sc
+```
+
+Run ETL pipeline:
+
+```bash
+scala-cli etl_pipeline.sc
+```
+
+### Build and test with sbt
+
+```bash
+sbt compile
+sbt test
+sbt run
 ```
 
 ---
@@ -164,6 +202,120 @@ Notes:
 
 ---
 
+## sbt - Scala Build Tool
+
+**What is sbt?**
+
+sbt (Scala Build Tool) is a build and task runner for Scala projects. It manages:
+- **Compilation**: Compile Scala code to bytecode
+- **Dependencies**: Download and manage libraries (from Maven Central, etc.)
+- **Testing**: Run unit tests with frameworks like ScalaTest
+- **Packaging**: Create JAR files for distribution
+
+**Key concepts:**
+
+- `build.sbt`: Configuration file defining project name, version, dependencies, Scala version
+- `src/main/scala/`: Production code
+- `src/test/scala/`: Test code
+- `target/`: Compiled output (auto-generated, don't edit)
+
+**Common commands:**
+
+```bash
+sbt compile       # Compile code
+sbt test          # Run all tests
+sbt test-only     # Run specific test
+sbt run           # Run main class
+sbt clean         # Remove compiled artifacts
+sbt package       # Create JAR file
+```
+
+**Example build.sbt:**
+
+```scala
+ThisBuild / scalaVersion := "3.3.1"
+ThisBuild / version := "0.1.0-SNAPSHOT"
+
+lazy val root = (project in file("."))
+  .settings(
+    name := "scala-sandbox",
+    libraryDependencies ++= Seq(
+      "org.scalatest" %% "scalatest" % "3.2.18" % Test,
+      "org.apache.spark" %% "spark-sql" % "3.5.1" % Provided
+    )
+  )
+```
+
+---
+
+## Example 4: Unit Tests
+
+Run tests:
+
+```bash
+sbt test                              # All tests
+sbt testOnly *WordCounterTest         # Specific test
+```
+
+Tests in `src/test/scala/` use ScalaTest framework:
+
+```scala
+class WordCounterTest extends AnyFlatSpec with Matchers:
+  "wordCount" should "count words correctly" in {
+    val result = WordCounter.wordCount("Scala is great and Scala is fast")
+    result("scala") should be(2)
+  }
+```
+
+---
+
+## Example 5: Dataset Transformation (Spark)
+
+Demonstrates Spark DataFrame/Dataset operations:
+
+```bash
+scala-cli dataset_transformation.sc
+```
+
+Features:
+* Create datasets from case classes
+* Filter and map operations
+* GroupBy and aggregations
+* Complex transformations with mapGroups
+
+```scala
+val employees = Seq(
+  Employee(1, "Alice", "Engineering", 120000),
+  Employee(2, "Bob", "Sales", 90000)
+).toDS()
+
+// Filter
+employees.filter(_.department == "Engineering").show()
+
+// GroupBy: Average salary by department
+employees
+  .groupBy(col("department"))
+  .agg(avg(col("salary")))
+  .show()
+```
+
+---
+
+## Example 6: ETL Pipeline
+
+Extract-Transform-Load demo with Spark:
+
+```bash
+scala-cli etl_pipeline.sc
+```
+
+Three steps:
+1. **Extract** - Load raw log data
+2. **Transform** - Clean, validate, aggregate
+3. **Load** - Generate summary reports
+
+---
+
 ## Useful commands
 
 Format code:
@@ -190,18 +342,20 @@ scala-cli compile hello.sc
 
 * modern Scala 3 syntax
 * functional collection processing
-* case classes
+* case classes and pattern matching
 * Option-safe style
+* sbt build system and dependency management
+* unit testing with ScalaTest
 * local Apache Spark execution
+* Dataset transformations
+* ETL pipeline patterns
 * reproducible local setup
 
 ---
 
-## Next extensions
+## Extensions completed
 
-Possible improvements:
-
-* add unit tests
-* add sbt version
-* add Dataset transformations
-* add small ETL pipeline
+✅ unit tests (ScalaTest framework)
+✅ sbt version with full project structure
+✅ Dataset transformations (Spark DataFrames)
+✅ Small ETL pipeline example

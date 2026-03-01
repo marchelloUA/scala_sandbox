@@ -1,0 +1,28 @@
+[0m[[0m[0mdebug[0m] [0m[0mRunning TaskDef(sandbox.PersonUtilsTest, org.scalatest.tools.Framework$$anon$1@55b05bbc, false, [SuiteSelector])[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning TaskDef(sandbox.WordCounterTest, org.scalatest.tools.Framework$$anon$1@55b05bbc, false, [SuiteSelector])[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mWordCounterTest:[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mwordCount[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should count words correctly[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should handle lowercase conversion[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should filter empty strings[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should return empty map for empty string[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mtopWords[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should return top n words sorted by frequency[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should return fewer words if n is larger than word count[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mPersonUtilsTest:[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mdescribe[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should identify adults[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should identify minors[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should identify 18 year olds as adults[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mfilterAdults[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should filter out minors[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should handle empty list[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should handle list with only minors[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mRun completed in 229 milliseconds.[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mTotal number of tests run: 12[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mSuites: completed 2, aborted 0[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mTests: succeeded 12, failed 0, canceled 0, ignored 0, pending 0[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mAll tests passed.[0m[0m
+[0m[[0m[0mdebug[0m] [0m[0mPassed tests:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	sandbox.PersonUtilsTest[0m
+[0m[[0m[0mdebug[0m] [0m[0m	sandbox.WordCounterTest[0m
